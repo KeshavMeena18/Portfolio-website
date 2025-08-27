@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens */
+:root{
+  --bg-0: hsl(0, 0%, 0%);
+  --bg-1: #b74402;
+  --text-strong: #FFFFFF;
+  --text: #D2D6DB;
+  --text-dim: #9AA3AE;
+  --accent-green: #19E487;
+  --accent-amber: #F7B731;
+  --upwork-green: #14A800;
+  --card-glass: rgba(255,255,255,0.03);
+  --card-border: rgba(255,255,255,0.08);
+  --focus-ring: rgba(25,228,135,0.28);
+  --radius-card: 14px;
+  --nav-height: 72px;
+  --container-max: 1200px;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* canvas */
+body {
+  background: radial-gradient(800px 400px at 12% 14%, rgba(25,232,135,0.02), transparent),
+              linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+  color: var(--text);
+  caret-color: transparent;
+}
+
+input, textarea {
+  caret-color: auto; /* keep caret visible only in form fields */
+}
+
+/* Glass stat card */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.45);
+}
+
+/* Nav underline animation */
+.nav-link {
+  position: relative;
+  color: var(--text);
+  transition: color .18s ease;
+}
+.nav-link::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  width: 44px;
+  height: 2px;
+  background: var(--accent-green);
+  border-radius: 9999px;
+  transition: transform .28s cubic-bezier(.22,1,.36,1), opacity .2s;
+  opacity: 0;
+}
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after{
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* Pill button */
+.btn-pill {
+  border-radius: 9999px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-weight: 600;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* Arc glow helper */
+.arc-glow {
+  filter: drop-shadow(0 0 20px rgba(25,228,135,0.22));
+}
+
+/* Mobile menu backdrop */
+.mobile-backdrop {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Portrait arch clip - optional helper */
+.arch-clip {
+  position: relative;
+  overflow: visible;
+}
+
+/* Portrait fade mask */
+.portrait-mask {
+  -webkit-mask-image: linear-gradient(180deg, black 75%, transparent 100%);
+  mask-image: linear-gradient(180deg, black 75%, transparent 100%);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* responsive adjustments for the stat positions - used in components */
+@media (max-width: 1024px){
+  .portrait-wrapper { width: 320px !important; height: 320px !important; }
+}
+@media (max-width: 768px){
+  .portrait-wrapper { width: 240px !important; height: 240px !important; }
+}
+
+@keyframes doodle-float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.float-slow   { animation: doodle-float 9s ease-in-out infinite; }
+.float-slower { animation: doodle-float 12s ease-in-out infinite; }
+.float-rev    { animation: doodle-float 10s ease-in-out infinite reverse; }
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow, .float-slower, .float-rev {
+    animation: none !important;
+  }
+}
+
+.glow {
+  background: radial-gradient(
+    300px circle at var(--x, 50%) var(--y, 50%),
+    rgba(25, 228, 135, 0.25),
+    transparent 60%
+  );
+  transition: background 0.1s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+.hover\\:animate-shake:hover {
+  animation: shake 0.25s ease-in-out;
+}
+
+/* Glow used inside the big skills CardBody */
+.glow-follow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  border-radius: 9999px;
+  /* radial gradient for the green glow */
+  background: radial-gradient(circle at center, rgba(199, 82, 9, 0.18), rgba(215, 76, 1, 0.08) 30%, transparent 60%);
+  filter: blur(38px);
+  opacity: 0;
+  transform: translate3d(-9999px, -9999px, 0) translate(-50%, -50%);
+  transition: opacity 120ms linear; /* only opacity transitions */
+  will-change: transform, opacity;
+  mix-blend-mode: screen;
+}
+/* visible instantly on pointer enter */
+.glow-follow.visible {
+  opacity: 1;
+}
+
+/* hide for reduced motion users */
+@media (prefers-reduced-motion: reduce) {
+  .glow-follow { display: none; }
+}
+
+
+
