@@ -5,7 +5,7 @@
 /* Design tokens */
 :root{
   --bg-0: hsl(0, 0%, 0%);
-  --bg-1: #b74402;
+  --bg-1: #ed510eb0;
   --text-strong: #FFFFFF;
   --text: #D2D6DB;
   --text-dim: #9AA3AE;
@@ -179,6 +179,23 @@ input, textarea {
 @media (prefers-reduced-motion: reduce) {
   .glow-follow { display: none; }
 }
+
+/* === hide scrollbar (works across browsers) === */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  height: 0px;
+  width: 0px;
+}
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+.no-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
 
 
 

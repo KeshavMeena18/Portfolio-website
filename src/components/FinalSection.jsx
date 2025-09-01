@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion"; // ok to keep if you use elsewhere
 import Avatar from "../assets/Avatar2.png";
 import { Link } from "react-router-dom";
+import AnimatedBorderButton from "./AnimatedBorderButton";
+
 
 export default function FinalSection() {
   const sectionRef = useRef(null);
@@ -159,14 +161,14 @@ export default function FinalSection() {
           >
             Instagram
           </a>
-          <button className="px-6 py-1 rounded bg-[#ea7704] text-[#2a211a] font-semibold bg-white border-none cursor-pointer hover:bg-[#9b2a01] hover:text-white transition-colors duration-300">
+          <AnimatedBorderButton className="bgColor='#111827' textColor='white' color='#f97316'">
             <Link
-                  to="/contact"
-                 className="px-4 py-2  rounded-lg"
+              to="/contact"
+              className="px-4 py-2  rounded-lg"
             >
-                Contact
-             </Link>
-          </button>
+              Contact
+            </Link>
+          </AnimatedBorderButton>
         </div>
       </div>
     </section>
